@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "../store/jobDataSlice";
 import Filterbar from "../components/Filterbar";
@@ -10,8 +9,19 @@ const JobPage = () => {
   const isLoading = useSelector((state:any) => state.isLoading);
 
   useEffect(() => {
-    dispatch(fetchJobs());
-    return;
+    const fetchData = async () => {
+      try {
+        await fetchJobs(dispatch); // Call fetchJobs with dispatch passed as a parameter
+      } catch (error) {
+        console.error("Error occurred during fetching of Jobs data:", error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      // Clean-up function (if needed)
+    };
   }, [dispatch]);
   
   return (

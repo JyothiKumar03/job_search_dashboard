@@ -4,19 +4,19 @@ import {Card, CardContent, Typography, Button, Collapse} from "@mui/material"
 
 const JobCard = ({job} : {job:any}) => {
     const [showMoreDescription, setshowMoreDescription] = useState(false);
-    const maxDescriptionLenght = 150;
+    const maxDescriptionLenght = 200;
 
     return(
         <Card className="job-card">
             <CardContent>
                 <Typography variant="h6" className="job-title">
-                    {job.jobRole}
+                    <b>{job.jobRole.toUpperCase()}</b>
                 </Typography>
                 <Typography variant="body1" className="location">
                     {job.company} {job.location}
                 </Typography>
                 <Typography variant="body2">
-                    Estimated Salary : ${job.minJdSalary ? `${job.minJdSalary}000` : "NA"}{" "} - ${job.maJdSalary ? job.maxJdSalary : "NA"}0000✅
+                    Estimated Salary : ${job.minJdSalary ? `${job.minJdSalary}000` : "NA"}{" "} - ${job.maJdSalary ? `${job.maxJdSalary}0000` : "NA"}✅
                 </Typography>
                 <Typography>About Company:</Typography>
                 <Collapse in={showMoreDescription} timeout="auto" unmountOnExit>

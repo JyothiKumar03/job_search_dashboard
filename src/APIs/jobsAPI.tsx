@@ -18,7 +18,7 @@ export const fetchJobsData = async (offset : number, limit : number): Promise<an
         "https://api.weekday.technology/adhoc/getSampleJdJSON",
         { ...requestOptions, body: requestBody }
     )
-    console.log('response - ',response)
+    console.log('response - ',(response))
     if(!response.ok){
         return "Network error in fetching data";
     }
