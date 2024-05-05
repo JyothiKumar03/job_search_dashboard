@@ -35,14 +35,15 @@ const JobCard = ({job} : {job:any}) => {
                 <Typography variant="body2" style={{marginBottom : "10px"}}>
                     Experience: {job.minExp ? job.minExp : "NA"} years
                 </Typography>
-                <Button variant="contained" color="primary" href={job.jdLink} className="apply-button">
-                    ⚡Easy Apply 
-                </Button>
-                <Button variant="contained" href={job.jdLink} className="apply-button" 
-                style={{ backgroundColor: 'violet', color: 'white' , marginTop : "5px"}}
-                >
-                    Unlock Referral Asks
-                </Button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                    <Button variant="contained" color="primary" href={job.jdLink} className="apply-button" style={{ width: '100%' }}>
+                        ⚡Easy Apply
+                    </Button>
+                    <Button variant="contained" href={job.jdLink} className="apply-button" style={{ backgroundColor: 'violet', color: 'white', width: '100%' }}>
+                        Unlock Referral Asks
+                    </Button>
+                </div>
+
             </CardContent>
         </Card>
     )

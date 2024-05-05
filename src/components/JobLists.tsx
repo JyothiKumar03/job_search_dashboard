@@ -55,7 +55,11 @@ import JobCard from "./JobCard";
         ))}
       </Grid>
       {loading && <CircularProgress />} {/* Show loading indicator */}
-      {!loading && filteredJobs.length === 0 && <p>No jobs found</p>}{" "}
+      {!loading && filteredJobs.length === 0 && 
+      <div style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}>
+            <h2>NO JOBS FOUND</h2>
+      </div>
+      }{" "}
       {/* Show message if no jobs found */}
       {!loading && visibleJobs < filteredJobs.length && ( // Show Load More button if there are more jobs to load
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
