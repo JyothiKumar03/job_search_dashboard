@@ -38,6 +38,11 @@ const JobCard = ({job} : {job:any}) => {
                 <Button variant="contained" color="primary" href={job.jdLink} className="apply-button">
                     ⚡Easy Apply 
                 </Button>
+                <Button variant="contained" href={job.jdLink} className="apply-button" 
+                style={{ backgroundColor: 'violet', color: 'white' , marginTop : "5px"}}
+                >
+                    Unlock Referral Asks
+                </Button>
             </CardContent>
         </Card>
     )
