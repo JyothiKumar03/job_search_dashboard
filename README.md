@@ -69,5 +69,5 @@ Some potential enhancements for the Candidate Application Platform include:
 - Enhancing the filtering options with additional criteria or advanced search functionality.
 
 
-![image](https://github.com/JyothiKumar03/job_search_dashboard/assets/88045362/e5fedb6d-3c28-4c20-a38d-885bf010e9f4)
+<img width="959" alt="image" src="https://github.com/JyothiKumar03/job_search_dashboard/assets/88045362/8c7be604-b4dc-4c51-b078-0b9af62ff699">
 
