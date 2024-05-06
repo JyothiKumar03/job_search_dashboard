@@ -27,6 +27,11 @@ The Candidate Application Platform is a web application designed to help users v
 
 4. **Responsive Design**: The platform is designed to be responsive and work well on different screen sizes, including mobile devices. This ensures a consistent user experience across various devices.
 
+## Extra Added Featurs
+
+**Implemented Key board accessibility feature where user can access the application with keyboard as well alongside with mouse**
+
+
 ## Technology Stack
 
 The Candidate Application Platform is built using the following technologies:
