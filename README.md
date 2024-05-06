@@ -30,6 +30,10 @@ The Candidate Application Platform is a web application designed to help users v
 ## Extra Added Featurs
 
 **Implemented Key board accessibility feature where user can access the application with keyboard as well alongside with mouse**
+1. Usage of Left and Right arrow keys at filter bar will nagivate through various inputs of filtes.
+2. When the cursor control is on the cards, clicking on the arrow keys will help in giving new cards, navigating through next cards in the UI
+
+(This is just an attempt to build keyboard accessibility feature for implementing good principles of front-end programming)
 
 
 ## Technology Stack
