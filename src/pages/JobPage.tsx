@@ -20,7 +20,7 @@ const JobPage = () => {
     fetchData();
 
     return () => {
-      // Clean-up function (if needed)
+     
     };
   }, [dispatch]);
   

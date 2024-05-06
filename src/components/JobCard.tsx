@@ -3,6 +3,7 @@ import {Card, CardContent, Typography, Button, Collapse} from "@mui/material"
 import './jobCard.css'
 
 const JobCard = ({job} : {job:any}) => {
+    console.log('job - ',job)
     const [showMoreDescription, setshowMoreDescription] = useState(false);
     const maxDescriptionLenght = 200;
 
@@ -13,7 +14,7 @@ const JobCard = ({job} : {job:any}) => {
                     <b>{job.jobRole.toUpperCase()}</b>
                 </Typography>
                 <Typography variant="body1" className="location">
-                    {job.company} {job.location}
+                    <i><b>{job.companyName}</b></i> - <i>{job.location}</i>
                 </Typography>
                 <Typography variant="body2">
                     Estimated Salary : ${job.minJdSalary ? `${job.minJdSalary}000` : "NA"}{" "} - ${job.maJdSalary ? `${job.maxJdSalary}0000` : "NA"}✅

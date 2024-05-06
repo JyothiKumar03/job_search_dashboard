@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import JobLists from "./JobLists";
 import { Box, TextField, MenuItem } from "@mui/material";
@@ -14,6 +14,46 @@ const Filterbar = () => {
   const [filterTechStack, setFilterTechStack] = useState("");
   const [filterRemote, setFilterRemote] = useState("");
   const [filterMinBasePay, setFilterMinBasePay] = useState("");
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+
+
+  const roleRef = useRef<HTMLInputElement>(null);
+  const locationRef = useRef<HTMLInputElement>(null);
+  const experienceRef = useRef<HTMLInputElement>(null);
+  const companyRef = useRef<HTMLInputElement>(null);
+  const techStackRef = useRef<HTMLInputElement>(null);
+  const remoteRef = useRef<HTMLInputElement>(null);
+  const minBasePayRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    roleRef.current?.focus();
+  }, []);
+
+  
+  const inputRefs = [roleRef, locationRef, experienceRef, companyRef, techStackRef, remoteRef, minBasePayRef];
+  const inputLabels = ["Role", "Location", "Min Experience", "Company", "Tech Stack", "Remote", "Min Base Pay"];
+
+  const handleFocusChange = (index: number) => {
+    setFocusedIndex(index);
+  };
+
+  // Function to handle arrow key navigation
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      const nextIndex = focusedIndex === null ? 0 : (focusedIndex + 1) % inputRefs.length;
+      inputRefs[nextIndex]?.current?.focus();
+      event.preventDefault(); // Prevent default behavior of arrow keys
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      const prevIndex = focusedIndex === null ? inputRefs.length - 1 : (focusedIndex - 1 + inputRefs.length) % inputRefs.length;
+      inputRefs[prevIndex]?.current?.focus();
+      event.preventDefault(); // Prevent default behavior of arrow keys
+    }
+  };
+
+  
+  
+  
+
 
   const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterRole(e.target.value);
@@ -54,6 +94,7 @@ const Filterbar = () => {
     setFilterMinBasePay(e.target.value);
   };
 
+  //dynamic rendering of the components with keyboard accessibility
   return (
     <div>
       <Box
@@ -65,79 +106,34 @@ const Filterbar = () => {
           gap: "10px",
         }}
       >
-        <TextField
-          type="text"
-          name="role"
-          label="Role"
-          variant="outlined"
-          value={filterRole}
-          onChange={handleRoleChange}
-        />
-        <TextField
-          type="text"
-          name="location"
-          label="Location"
-          variant="outlined"
-          value={filterLocation}
-          onChange={handleLocationChange}
-        />
-        <TextField
-          select
-          type="number"
-          name="experience"
-          label="Min Experience"
-          variant="outlined"
-          value={filterExperience}
-          onChange={handleExperienceChange}
-          style={{
-            width:"160px"
-          }}
-        >
-          <MenuItem value="">All</MenuItem>
-          {[...Array(10)].map((_, index) => (
-            <MenuItem key={index + 1} value={String(index + 1)}>{index + 1}</MenuItem>
-          ))}
-        </TextField>
-
-        <TextField
-          type="text"
-          name="company"
-          label="Company"
-          variant="outlined"
-          value={filterCompany}
-          onChange={handleCompanyChange}
-        />
-        <TextField
-          type="text"
-          name="techStack"
-          label="Tech Stack"
-          variant="outlined"
-          value={filterTechStack}
-          onChange={handleTechStackChange}
-        />
-        <TextField
-          select
-          label="Remote"
-          name="Remote"
-          value={filterRemote}
-          onChange={handleRemoteChange}
-          variant="outlined"
-          style={{
-            width:"160px"
-          }}
-        >
-          <MenuItem value="">All</MenuItem>
-          <MenuItem value="remote">Remote</MenuItem>
-          <MenuItem value="on-site">On-site</MenuItem>
-        </TextField>
-        <TextField
-          type="number"
-          name="minBasePay"
-          label="Min Base Pay"
-          variant="outlined"
-          value={filterMinBasePay}
-          onChange={handleMinBasePayChange}
-        />
+        {inputRefs.map((ref, index) => (
+          <TextField
+            key={index}
+            type="text"
+            name={`input-${index}`}
+            label={inputLabels[index]}
+            variant="outlined"
+            value={index === 0 ? filterRole : index === 1 ? filterLocation : index === 2 ? filterExperience : index === 3 ? filterCompany : index === 4 ? filterTechStack : index === 5 ? filterRemote : filterMinBasePay}
+            onChange={index === 0 ? handleRoleChange : index === 1 ? handleLocationChange : index === 2 ? handleExperienceChange : index === 3 ? handleCompanyChange : index === 4 ? handleTechStackChange : index === 5 ? handleRemoteChange : handleMinBasePayChange}
+            inputRef={ref}
+            onKeyDown={handleKeyDown}
+            onFocus={() => handleFocusChange(index)} 
+            style={index === 2 || index === 6 ? { width: "160px" } : index === 5 ? { width: "200px" } : {}}
+            select={index === 2 || index === 5}
+          >
+            {index === 2 &&
+              [<MenuItem key="all" value="">All</MenuItem>,
+              [...Array(10)].map((_, i) => (
+                <MenuItem key={i + 1} value={String(i + 1)}>
+                  {i + 1}
+                </MenuItem>
+              ))]}
+            {index === 5 &&
+              [<MenuItem key="all" value="">All</MenuItem>,
+              <MenuItem key="remote" value="remote">Remote</MenuItem>,
+              <MenuItem key="on-site" value="on-site">On-site</MenuItem>]}
+          </TextField>
+        ))}
       </Box>
       <JobLists
         jobs={jobs}
@@ -151,6 +147,6 @@ const Filterbar = () => {
       />
     </div>
   );
-};
-
+}
+  
 export default Filterbar;
