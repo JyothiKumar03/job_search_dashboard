@@ -93,7 +93,7 @@ const Filterbar = () => {
             width:"160px"
           }}
         >
-          {/* <MenuItem value="">All</MenuItem> */}
+          <MenuItem value="">All</MenuItem>
           {[...Array(10)].map((_, index) => (
             <MenuItem key={index + 1} value={String(index + 1)}>{index + 1}</MenuItem>
           ))}

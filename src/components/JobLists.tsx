@@ -9,6 +9,7 @@ import JobCard from "./JobCard";
   const [loading, setLoading] = useState(false);
 
   const filteredJobs = jobs.filter((job: any) => {
+    console.log('jobdata - ',job);
     const matchesRole =
       job?.jobRole.toLowerCase()?.includes(filterRole.toLowerCase()) ||
       !filterRole;
@@ -21,28 +22,39 @@ import JobCard from "./JobCard";
     const matchesCompany =
       job?.companyName.toLowerCase()?.includes(filterCompany.toLowerCase()) ||
       !filterCompany;
-    // const matchesTechStack =
-    //   filterTechStack &&
-    //   job?.techStack &&
-    //   job?.techStack.toLowerCase()?.includes(filterTechStack.toLowerCase());
-    // const matchesRemote =
-    //   filterRemote === "all" || (job?.remote && job?.remote.toLowerCase() === filterRemote);
-    // const matchesMinBasePay =
-    //   !filterMinBasePay ||
-    //   (job?.minBasePay && job?.minBasePay >= filterMinBasePay);
+      const matchesTechStack =
+      
+      !filterTechStack ||  // Check if filterTechStack is empty
+      (job?.jobRole && job?.jobRole.toLowerCase()?.includes(filterTechStack.toLowerCase()));
+
+    const matchesRemote =
+      !filterRemote ||  // Check if filterRemote is empty
+      (job?.location && job?.location.toLowerCase()?.includes(filterRemote.toLowerCase()));
+
+    
+    const matchesMinBasePay =
+      !filterMinBasePay ||
+      (job?.minJdSalary && job?.minJdSalary >= filterMinBasePay);
+    
+  //     console.log('filterTechStack:', filterTechStack);
+  // console.log('filterRemote:', filterRemote);
+  // console.log('job?.location:', job?.location);
   
     return (
       matchesRole &&
       matchesLocation &&
       matchesExperience &&
-      matchesCompany 
+      matchesCompany && 
+      matchesTechStack &&
+      matchesRemote &&
+      matchesMinBasePay
     );
   });
   
   
-
+// infinite scrool feature
   const loadMoreJobs = () => {
-    setVisibleJobs((prev) => prev + 10);
+    setVisibleJobs((prev) => prev + 5);
   };
 
   return (
@@ -54,13 +66,13 @@ import JobCard from "./JobCard";
           </Grid>
         ))}
       </Grid>
-      {loading && <CircularProgress />} {/* Show loading indicator */}
+      {loading && <CircularProgress />} 
       {!loading && filteredJobs.length === 0 && 
       <div style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}>
             <h2>NO JOBS FOUND</h2>
       </div>
       }{" "}
-      {/* Show message if no jobs found */}
+      
       {!loading && visibleJobs < filteredJobs.length && ( // Show Load More button if there are more jobs to load
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
         <Button onClick={loadMoreJobs} variant="contained" style={{}}>

@@ -1,0 +1,43 @@
+.job-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    border-radius: 20px;
+    padding: 10px 5px;
+    background-color: rgb(255, 255, 255);
+    max-width: 360px;
+    box-shadow: rgb(0, 0, 0, 0.25) 0px 1px 4px 0px;
+    margin-left: 50px;
+    margin-right: 20px;
+    font-weight: 400;
+  }
+  
+  .job-card:hover {
+    transform: scale(1.1);
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .job-title {
+    text-transform: capitalize;
+  }
+  
+  .location {
+    text-transform: capitalize;
+  }
+  
+  .apply-button {
+    cursor: pointer;
+    width: 100%;
+    background-color: rgb(85, 239, 196);
+    border-radius: 0.5rem;
+    border-color: rgb(85, 239, 196);
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    padding: 8px 18px;
+  }
+  

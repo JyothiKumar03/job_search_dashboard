@@ -1,6 +1,6 @@
 import {useState} from "react"
 import {Card, CardContent, Typography, Button, Collapse} from "@mui/material"
-
+import './jobCard.css'
 
 const JobCard = ({job} : {job:any}) => {
     const [showMoreDescription, setshowMoreDescription] = useState(false);
